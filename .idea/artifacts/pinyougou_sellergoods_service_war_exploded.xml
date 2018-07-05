@@ -39,8 +39,12 @@
           <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.28" />
           <element id="library" level="project" name="Maven: javassist:javassist:3.11.0.GA" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
-          <element id="library" level="project" name="Maven: com.pinyougou:pinyougou_common:1.0-SNAPSHOT" />
-          <element id="library" level="project" name="Maven: com.pinyougou:pinyougou_dao:1.0-SNAPSHOT" />
+          <element id="archive" name="pinyougou_common-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="pinyougou_common" />
+          </element>
+          <element id="archive" name="pinyougou_dao-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="pinyougou_dao" />
+          </element>
           <element id="library" level="project" name="Maven: com.github.abel533:mapper:2.3.4" />
           <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.9.2" />
@@ -52,8 +56,12 @@
           <element id="library" level="project" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.32" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.9" />
-          <element id="library" level="project" name="Maven: com.pinyougou:pinyougou_pojo:1.0-SNAPSHOT" />
-          <element id="library" level="project" name="Maven: com.pinyougou:pinyougou_sellergoods_interface:1.0-SNAPSHOT" />
+          <element id="archive" name="pinyougou_pojo-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="pinyougou_pojo" />
+          </element>
+          <element id="archive" name="pinyougou_sellergoods_interface-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="pinyougou_sellergoods_interface" />
+          </element>
         </element>
       </element>
       <element id="directory" name="META-INF">

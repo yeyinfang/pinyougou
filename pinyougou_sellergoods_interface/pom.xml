@@ -13,10 +13,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.pinyougou</groupId>
+            <groupId>com.ye</groupId>
             <artifactId>pinyougou_pojo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
 
 </project>
