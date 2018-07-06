@@ -1,5 +1,6 @@
 package com.pingyougou.sellergoods.service;
 
+import com.pinyougou.entity.PageResult;
 import com.pinyougou.pojo.TbBrand;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public interface BrandService {
     * @Param: [] 
     * @return: java.util.List<com.pinyougou.pojo.TbBrand> 
     * @Author: Yin 
-    * @Date: 2018/7/5 
+    * @Date: 2018/7/5
+     * @param page
+     * @param size
     */ 
-    public List<TbBrand> findAll();
+    public PageResult<TbBrand> findAll(Integer page, Integer size);
 }
