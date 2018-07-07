@@ -1,4 +1,4 @@
-package com.pingyougou.sellergoods.service;
+package com.pinyougou.sellergoods.service;
 
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.pojo.TbBrand;

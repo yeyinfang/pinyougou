@@ -1,7 +1,7 @@
-package com.pinyougou.manager.controller;
+package com.pinyougou.sellergoods.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.pingyougou.sellergoods.service.BrandService;
+import com.pinyougou.sellergoods.service.BrandService;
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.entity.Result;
 import com.pinyougou.pojo.TbBrand;
@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
