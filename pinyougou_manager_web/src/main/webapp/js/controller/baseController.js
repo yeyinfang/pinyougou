@@ -1,5 +1,5 @@
 //基本的功能
-pyg.controller('baseController',function ($scope) {
+app.controller('baseController',function ($scope) {
     //分页的功能
     $scope.paginationConf =  {
         //当前页

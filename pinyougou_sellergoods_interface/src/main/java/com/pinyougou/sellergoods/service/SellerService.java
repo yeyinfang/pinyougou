@@ -49,7 +49,7 @@ public interface SellerService {
 	 * 批量删除
 	 * @param ids
 	 */
-	public void delete(Long [] ids);
+	public void delete(Long[] ids);
 
 	/**
 	 * 分页
@@ -57,6 +57,6 @@ public interface SellerService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbSeller seller, int pageNum,int pageSize);
+	public PageResult findPage(TbSeller seller, int pageNum, int pageSize);
 	
 }

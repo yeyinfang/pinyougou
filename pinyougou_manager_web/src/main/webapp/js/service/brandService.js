@@ -1,5 +1,5 @@
 /*定义服务*/
-pyg.service("brandService", function ($http) {
+app.service("brandService", function ($http) {
     //分页
     this.findPage = function (page, size, entity) {
         return $http.post("../brand/findAll.do?page=" + page + "&size=" + size, entity);

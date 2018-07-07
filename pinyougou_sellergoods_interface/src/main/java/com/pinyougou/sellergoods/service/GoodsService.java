@@ -50,7 +50,7 @@ public interface GoodsService {
 	 * 批量删除
 	 * @param ids
 	 */
-	public void delete(Long [] ids);
+	public void delete(Long[] ids);
 
 	/**
 	 * 分页
@@ -58,6 +58,6 @@ public interface GoodsService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbGoods goods, int pageNum,int pageSize);
+	public PageResult findPage(TbGoods goods, int pageNum, int pageSize);
 	
 }

@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.pojo.TbSpecification;
+import com.pinyougou.pojogroup.Specification;
 
 /**
  * 业务逻辑接口
@@ -28,13 +29,13 @@ public interface SpecificationService {
 	/**
 	 * 增加
 	*/
-	public void add(TbSpecification specification);
+	public void add(Specification specification);
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(TbSpecification specification);
+	public void update(Specification specification);
 	
 
 	/**
@@ -42,14 +43,14 @@ public interface SpecificationService {
 	 * @param id
 	 * @return
 	 */
-	public TbSpecification findOne(Long id);
+	public Specification findOne(Long id);
 	
 	
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void delete(Long [] ids);
+	public void delete(Long[] ids);
 
 	/**
 	 * 分页
@@ -57,6 +58,6 @@ public interface SpecificationService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbSpecification specification, int pageNum,int pageSize);
+	public PageResult findPage(TbSpecification specification, int pageNum, int pageSize);
 	
 }

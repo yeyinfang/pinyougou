@@ -3,6 +3,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.pinyougou.entity.PageResult;
+import com.pinyougou.mapper.TbSpecificationOptionMapper;
+import com.pinyougou.pojo.TbSpecificationOption;
+import com.pinyougou.pojogroup.Specification;
+import com.pinyougou.sellergoods.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.abel533.entity.Example;
@@ -10,7 +14,6 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbSpecificationMapper;
 import com.pinyougou.pojo.TbSpecification;
-import com.pinyougou.sellergoods.service.SpecificationService;
 
 
 /**
@@ -23,6 +26,9 @@ public class SpecificationServiceImpl implements SpecificationService {
 
 	@Autowired
 	private TbSpecificationMapper specificationMapper;
+
+	@Autowired
+	private TbSpecificationOptionMapper specificationOptionMapper;
 	
 	/**
 	 * 查询全部
@@ -57,8 +63,18 @@ public class SpecificationServiceImpl implements SpecificationService {
 	 * 增加
 	 */
 	@Override
-	public void add(TbSpecification specification) {
-		specificationMapper.insertSelective(specification);		
+	public void add(Specification specification) {
+
+		//首先就是保存规格
+		specificationMapper.insertSelective(specification.getSpecification());
+		//循环遍历保存规格选项
+		List<TbSpecificationOption> optionList = specification.getSpecificationOptionList();
+		for (TbSpecificationOption option : optionList) {
+			//设置规格id
+			option.setSpecId(specification.getSpecification().getId());
+			specificationOptionMapper.insertSelective(option);
+		}
+
 	}
 
 	
@@ -66,8 +82,20 @@ public class SpecificationServiceImpl implements SpecificationService {
 	 * 修改
 	 */
 	@Override
-	public void update(TbSpecification specification){
-		specificationMapper.updateByPrimaryKeySelective(specification);
+	public void update(Specification specification){
+		//更新规格消息
+		specificationMapper.updateByPrimaryKeySelective(specification.getSpecification());
+		//删除之前的所有的规格选项
+		TbSpecificationOption option = new TbSpecificationOption();
+		option.setSpecId(specification.getSpecification().getId());
+		specificationOptionMapper.delete(option);
+		List<TbSpecificationOption> optionList = specification.getSpecificationOptionList();
+		for (TbSpecificationOption specificationOption : optionList) {
+			//增加
+			//设置规格id
+			specificationOption.setSpecId(specification.getSpecification().getId());
+			specificationOptionMapper.insertSelective(specificationOption);
+		}
 	}	
 	
 	/**
@@ -76,8 +104,17 @@ public class SpecificationServiceImpl implements SpecificationService {
 	 * @return
 	 */
 	@Override
-	public TbSpecification findOne(Long id){
-		return specificationMapper.selectByPrimaryKey(id);
+	public Specification findOne(Long id){
+		Specification specification  =new Specification();
+		//根据id获取到规格的值
+		TbSpecification tbSpecification = specificationMapper.selectByPrimaryKey(id);
+		specification.setSpecification(tbSpecification);
+		//根据规格的id获取到规格的选项
+		TbSpecificationOption option = new TbSpecificationOption();
+		option.setSpecId(tbSpecification.getId());
+		List<TbSpecificationOption> options = specificationOptionMapper.select(option);
+		specification.setSpecificationOptionList(options);
+		return specification;
 	}
 
 	/**
@@ -94,6 +131,12 @@ public class SpecificationServiceImpl implements SpecificationService {
 
         //跟据查询条件删除数据
         specificationMapper.deleteByExample(example);
+        //删除相关联的数据
+		for (Long id : ids) {
+			TbSpecificationOption option = new TbSpecificationOption();
+			option.setSpecId(id);
+			specificationOptionMapper.delete(option);
+		}
 	}
 	
 	
