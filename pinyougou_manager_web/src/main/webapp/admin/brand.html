@@ -17,6 +17,10 @@
 	<script src="../plugins/angularjs/pagination.js"></script>
 	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
 	<!-- 分页组件结束 -->
+	<script type="text/javascript" src="../js/base_pagination.js">  </script>
+	<script type="text/javascript" src="../js/service/brandService.js">  </script>
+	<script type="text/javascript" src="../js/controller/brandController.js">  </script>
+	<script type="text/javascript" src="../js/controller/baseController.js"></script>
 
 
 
@@ -127,124 +131,3 @@
    
 </body>
 </html>
-<script type="application/javascript">
-	/*定义模块*/
-	var pyg =angular.module('pinyougou',['pagination']);
-	/*定义控制器*/
-	pyg.controller("brandController",function($scope,$http){
-        /* 分页处理 */
-        $scope.paginationConf = {
-            //当前页
-            currentPage: 1,
-            //总记录数
-            totalItems: 10,
-            //每页查询的记录数
-            itemsPerPage: 10,
-            //分页选项，用于选择每页显示多少条记录
-            perPageOptions: [10, 20, 30, 40, 50],
-            //当页码变更后触发的函数
-            onChange: function () {
-                $scope.reloadList();//重新加载
-            }
-        };
-
-			/*重新加载数据*/
-            $scope.reloadList = function () {
-                $scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-            };
-
-            /*分页处理*/
-        	$scope.searchEntity={};
-            $scope.findPage =function (page,size) {
-                /*$http.get("../brand/findAll.do?page=" + page + "&size=" + size).success(function (data) {
-                    //更新数据列表
-                    $scope.list = data.rows;
-                    //更新总记录数
-                    $scope.paginationConf.totalItems = data.total;
-                });*/
-
-                /*条件查询*/
-                $http.post("../brand/findAll.do?page=" + page + "&size=" + size,$scope.searchEntity).success(function (data) {
-                    //更新数据列表
-                    $scope.list = data.rows;
-                    //更新总记录数
-                    $scope.paginationConf.totalItems = data.total;
-                });
-
-            };
-
-			/*
-			* 以下是增加的方法
-			* */
-			//新增品牌
-			//如果id不为空，则就是修改
-			$scope.add = function () {
-			    //设置一个方法参数
-                var methodName="add.do";
-			    if($scope.entity.id!=null){
-					//这就证明要进行修改操作
-                    methodName = "update.do";
-				}
-				$http.post("../brand/"+methodName,$scope.entity).success(function (data) {
-					//如果保存成功，重新加载数据
-					if (data.success) {
-						$scope.reloadList();
-					}else{
-						//失败时显示失败消息
-						alert(data.message);
-					}
-				})
-			}
-
-			/*
-			* 回显数据
-			* */
-			$scope.findById = function (id) {
-				$http.get("../brand/findById.do?id="+id).success(function (data) {
-                    console.log(data);
-                    $scope.entity = data;
-                }).error(function (data,header,config,status) {
-					console.log(header);
-					console.log(config);
-					console.log(status);
-                })
-            };
-
-			/*
-			* 下拉列表的选择
-			*
-			* */
-			//选中列表的id
-			$scope.selectIds = [];
-			$scope.updateSelection = function ($event,id) {
-
-                //如果是被选中,则增加到数组
-				if ($event.target.checked){
-                    $scope.selectIds.push(id);
-				}else{
-                    //查找当前id的下标
-					var idx=$scope.selectIds.indexOf(1);
-                    //删除数据
-                    $scope.selectIds.splice(idx, 1);
-
-                }
-            }
-
-			/*
-			* 删除数据
-			* */
-			$scope.delete = function () {
-				$http.get("../brand/delete.do?ids="+$scope.selectIds).success(function (data) {
-					if(data.success){
-                        $scope.reloadList();
-                    }else{
-                        //失败时显示失败消息
-                        alert(data.message);
-                    }
-                });
-            }
-
-
-    });
-
-</script>
