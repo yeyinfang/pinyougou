@@ -12,7 +12,7 @@
     <artifactId>pinyougou_manager_web</artifactId>
     <packaging>war</packaging>
 
-    <name>pinyougou_manager_web Maven Webapp</name>
+    <name>pinyougou_manager_web</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -103,6 +103,15 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
+        </dependency>
+        <!--权限的框架-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
         </dependency>
     </dependencies>
     <build>
