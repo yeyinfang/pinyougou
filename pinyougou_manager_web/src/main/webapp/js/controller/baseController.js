@@ -1,7 +1,7 @@
 //基本的功能
-app.controller('baseController',function ($scope) {
+app.controller('baseController', function ($scope) {
     //分页的功能
-    $scope.paginationConf =  {
+    $scope.paginationConf = {
         //当前页
         currentPage: 1,
         //总记录数
@@ -20,7 +20,7 @@ app.controller('baseController',function ($scope) {
         $scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
     }
     //选择下拉列表框
-    $scope.selectIds=[];
+    $scope.selectIds = [];
     //复选更新选中列表
     $scope.updateSelection = function ($event, id) {
         //如果是被选中,则增加到数组
@@ -34,6 +34,19 @@ app.controller('baseController',function ($scope) {
         }
     }
 
+    //跟据需求输出json串
+    //jsonString要转换的json串,key要读取的值
+    $scope.jsonToString = function (jsonString, key) {
+        var json = JSON.parse(jsonString);
+        var result = "";
+        for (var i = 0; i < json.length; i++) {
+            if (i > 0) {
+                result += ",";
+            }
+            result += json[i][key];
+        }
+        return result;
+    }
 
 
 })

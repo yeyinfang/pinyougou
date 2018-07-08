@@ -3,6 +3,8 @@ package com.pinyougou.sellergoods.service;
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.pojo.TbBrand;
 
+import java.util.List;
+
 /*
 * 品牌业务逻辑接口
 * */
@@ -18,7 +20,7 @@ public interface BrandService {
      * @param size
      * @param brand
      */
-    public PageResult<TbBrand> findAll(Integer page, Integer size, TbBrand brand);
+    public PageResult<TbBrand> search(Integer page, Integer size, TbBrand brand);
 
     /** 
     * @Description: 对品牌业务进行增加
@@ -55,4 +57,22 @@ public interface BrandService {
     * @Date: 2018/7/6 
     */ 
     void deleteBrand(Long[] ids);
+
+    /** 
+    * @Description: 查询所有的
+    * @Param: [] 
+    * @return: java.util.List<com.pinyougou.pojo.TbBrand> 
+    * @Author: Yin 
+    * @Date: 2018/7/8 
+    */ 
+    List<TbBrand> findAll();
+
+    /** 
+    * @Description: 分页查找
+    * @Param: [page, size] 
+    * @return: com.pinyougou.entity.PageResult<com.pinyougou.pojo.TbBrand> 
+    * @Author: Yin 
+    * @Date: 2018/7/8 
+    */ 
+    PageResult<TbBrand> findPage(Integer page, Integer size);
 }

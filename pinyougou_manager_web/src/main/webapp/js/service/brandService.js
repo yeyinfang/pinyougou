@@ -1,8 +1,12 @@
 /*定义服务*/
 app.service("brandService", function ($http) {
+    //查询所有
+    this.findAll=function () {
+        return $http.get("../brand/findAll.do");
+    }
     //分页
     this.findPage = function (page, size, entity) {
-        return $http.post("../brand/findAll.do?page=" + page + "&size=" + size, entity);
+        return $http.post("../brand/search.do?page=" + page + "&size=" + size, entity);
     }
     //增加
     this.add = function (entity) {
@@ -23,5 +27,6 @@ app.service("brandService", function ($http) {
     this.delete = function (ids) {
         return $http.get("../brand/delete.do?ids="+ids);
     }
+
 
 });

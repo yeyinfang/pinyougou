@@ -2,26 +2,7 @@
 app.controller("brandController", function ($scope, $controller,brandService) {
     $controller('baseController',{$scope:$scope});//继承
 
-    /* 分页处理 */
-    $scope.paginationConf = {
-        //当前页
-        currentPage: 1,
-        //总记录数
-        totalItems: 10,
-        //每页查询的记录数
-        itemsPerPage: 10,
-        //分页选项，用于选择每页显示多少条记录
-        perPageOptions: [10, 20, 30, 40, 50],
-        //当页码变更后触发的函数
-        onChange: function () {
-            $scope.reloadList();//重新加载
-        }
-    };
 
-    /*重新加载数据*/
-    $scope.reloadList = function () {
-        $scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-    };
 
     /*
     * 以下是增加的方法

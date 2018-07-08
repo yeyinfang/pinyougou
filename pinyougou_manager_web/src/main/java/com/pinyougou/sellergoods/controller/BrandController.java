@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 
 
 /**
@@ -29,10 +30,25 @@ public class BrandController {
     @Reference
     private BrandService brandService;
 
+    //条件查询
+    @RequestMapping("/search")
+    @ResponseBody
+    public PageResult<TbBrand> search(Integer page, Integer size,@RequestBody TbBrand brand){
+        return brandService.search(page,size,brand);
+    }
+
+    //分页
+    @RequestMapping("/findPage")
+    @ResponseBody
+    public PageResult<TbBrand> findPage(Integer page, Integer size){
+        return brandService.findPage(page,size);
+    }
+
+    //查找所有的
     @RequestMapping("/findAll")
     @ResponseBody
-    public PageResult<TbBrand> findAll(Integer page, Integer size,@RequestBody TbBrand brand){
-        return brandService.findAll(page,size,brand);
+    public List<TbBrand> findAll(){
+        return  brandService.findAll();
     }
 
     /*

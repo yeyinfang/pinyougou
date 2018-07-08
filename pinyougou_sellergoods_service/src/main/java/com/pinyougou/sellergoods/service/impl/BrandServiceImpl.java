@@ -27,7 +27,7 @@ public class BrandServiceImpl implements BrandService {
     private TbBrandMapper brandMapper;
 
     @Override
-    public PageResult<TbBrand> findAll(Integer page, Integer size, TbBrand brand) {
+    public PageResult<TbBrand> search(Integer page, Integer size, TbBrand brand) {
         /*分页处理*/
         PageHelper.startPage(page,size);
         //首先就是构建查询的条件
@@ -76,6 +76,23 @@ public class BrandServiceImpl implements BrandService {
         criteria.andIn("id",longs);
         //删除
         brandMapper.deleteByExample(example);
+    }
+
+    @Override
+    public List<TbBrand> findAll() {
+        return brandMapper.select(null);
+    }
+
+    @Override
+    public PageResult<TbBrand> findPage(Integer page, Integer size) {
+         /*分页处理*/
+        PageHelper.startPage(page,size);
+        List<TbBrand> brandList = brandMapper.select(null);
+        PageInfo<TbBrand> info = new PageInfo<>(brandList);
+        PageResult<TbBrand> pageResult = new PageResult<>();
+        pageResult.setRows(info.getList());
+        pageResult.setTotal(info.getTotal());
+        return pageResult;
     }
 
 }
