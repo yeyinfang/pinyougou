@@ -26,6 +26,9 @@
         <form-login login-page="/login.html" default-target-url="/admin/index.html"
                     authentication-failure-forward-url="/login.html" always-use-default-target="true"/>
 
+        <!--退出登陆-->
+        <logout/>
+
         <csrf disabled="true"/>
 
         <!--让springSecurity不拦截iframe-->
