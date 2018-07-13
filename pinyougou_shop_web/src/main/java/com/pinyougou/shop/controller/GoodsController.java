@@ -1,10 +1,10 @@
-package com.pinyuogou.shop.controller;
+package com.pinyougou.shop.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.entity.Result;
-import com.pinyougou.pojo.TbSeller;
-import com.pinyougou.sellergoods.service.SellerService;
+import com.pinyougou.pojo.TbGoods;
+import com.pinyougou.sellergoods.service.GoodsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,19 +18,19 @@ import java.util.List;
  *
  */
 @RestController
-@RequestMapping("/seller")
-public class SellerController {
+@RequestMapping("/goods")
+public class GoodsController {
 
 	@Reference
-	private SellerService sellerService;
+	private GoodsService goodsService;
 	
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbSeller> findAll(){			
-		return sellerService.findAll();
+	public List<TbGoods> findAll(){			
+		return goodsService.findAll();
 	}
 	
 	
@@ -40,18 +40,18 @@ public class SellerController {
 	 */
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page, int rows){
-		return sellerService.findPage(page, rows);
+		return goodsService.findPage(page, rows);
 	}
 	
 	/**
 	 * 增加
-	 * @param seller
+	 * @param goods
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbSeller seller){
+	public Result add(@RequestBody TbGoods goods){
 		try {
-			sellerService.add(seller);
+			goodsService.add(goods);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,13 +61,13 @@ public class SellerController {
 	
 	/**
 	 * 修改
-	 * @param seller
+	 * @param goods
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody TbSeller seller){
+	public Result update(@RequestBody TbGoods goods){
 		try {
-			sellerService.update(seller);
+			goodsService.update(goods);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,8 +81,8 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbSeller findOne(Long id){
-		return sellerService.findOne(id);		
+	public TbGoods findOne(Long id){
+		return goodsService.findOne(id);		
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class SellerController {
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
-			sellerService.delete(ids);
+			goodsService.delete(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,14 +103,14 @@ public class SellerController {
 	
 	/**
 	 * 查询+分页
-	 * @param seller
+	 * @param goods
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
-		return sellerService.findPage(seller, page, rows);		
+	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
+		return goodsService.findPage(goods, page, rows);		
 	}
 	
 }

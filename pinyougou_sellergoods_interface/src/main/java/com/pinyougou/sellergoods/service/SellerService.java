@@ -42,7 +42,7 @@ public interface SellerService {
 	 * @param id
 	 * @return
 	 */
-	public TbSeller findOne(Long id);
+	public TbSeller findOne(String id);
 	
 	
 	/**

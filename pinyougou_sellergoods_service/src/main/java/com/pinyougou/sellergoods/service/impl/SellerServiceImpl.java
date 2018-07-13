@@ -1,5 +1,6 @@
 package com.pinyougou.sellergoods.service.impl;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.pinyougou.entity.PageResult;
@@ -58,7 +59,10 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public void add(TbSeller seller) {
-		sellerMapper.insertSelective(seller);		
+		//设置为待审核状态
+		seller.setStatus("0");
+		seller.setCreateTime(new Date());
+		sellerMapper.insertSelective(seller);
 	}
 
 	
@@ -76,7 +80,7 @@ public class SellerServiceImpl implements SellerService {
 	 * @return
 	 */
 	@Override
-	public TbSeller findOne(Long id){
+	public TbSeller findOne(String id){
 		return sellerMapper.selectByPrimaryKey(id);
 	}
 
@@ -210,5 +214,8 @@ public class SellerServiceImpl implements SellerService {
 		
 		return result;
 	}
+
+
+
 	
 }
