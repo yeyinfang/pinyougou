@@ -1,11 +1,11 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller,goodsService,brandService,itemCatService){
+app.controller('itemController' ,function($scope,$controller,itemService){	
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
-		goodsService.findAll().success(
+		itemService.findAll().success(
 			function(response){
 				$scope.list=response;
 			}			
@@ -14,7 +14,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,brand
 	
 	//分页
 	$scope.findPage=function(page,rows){			
-		goodsService.findPage(page,rows).success(
+		itemService.findPage(page,rows).success(
 			function(response){
 				$scope.list=response.rows;	
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
@@ -24,7 +24,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,brand
 	
 	//查询实体 
 	$scope.findOne=function(id){				
-		goodsService.findOne(id).success(
+		itemService.findOne(id).success(
 			function(response){
 				$scope.entity= response;					
 			}
@@ -33,21 +33,18 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,brand
 	
 	//保存 
 	$scope.save=function(){				
-		var serviceObject;//服务层对象
-        $scope.entity.goodsDesc.introduction=editor.html();//获取到文本框中的文字
+		var serviceObject;//服务层对象  				
 		if($scope.entity.id!=null){//如果有ID
-			serviceObject=goodsService.update( $scope.entity ); //修改  
+			serviceObject=itemService.update( $scope.entity ); //修改  
 		}else{
-			serviceObject=goodsService.add( $scope.entity  );//增加 
+			serviceObject=itemService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(
 			function(response){
-                alert(response.message);
-                if(response.success){
-                    //清空实体
-                    $scope.entity={};
-                    editor.html('');//清空富文本编辑器
-                }else{
+				if(response.success){
+					//重新查询 
+		        	$scope.reloadList();//重新加载
+				}else{
 					alert(response.message);
 				}
 			}		
@@ -58,7 +55,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,brand
 	//批量删除 
 	$scope.dele=function(){			
 		//获取选中的复选框			
-		goodsService.dele( $scope.selectIds ).success(
+		itemService.dele( $scope.selectIds ).success(
 			function(response){
 				if(response.success){
 					$scope.reloadList();//刷新列表
@@ -71,19 +68,12 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,brand
 	
 	//搜索
 	$scope.search=function(page,rows){			
-		goodsService.search(page,rows,$scope.searchEntity).success(
+		itemService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.rows;	
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
 	}
-
-	//查找到所有的品牌
-	$scope.findBrandAll=function () {
-		brandService.findAll().success(function (response) {
-			$scope.entity.brands=response;
-        })
-    }
     
 });	

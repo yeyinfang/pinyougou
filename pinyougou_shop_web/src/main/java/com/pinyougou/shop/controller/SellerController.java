@@ -105,7 +105,7 @@ public class SellerController {
 			return new Result(false, "删除失败");
 		}
 	}
-	
+
 	/**
 	 * 查询+分页
 	 * @param seller

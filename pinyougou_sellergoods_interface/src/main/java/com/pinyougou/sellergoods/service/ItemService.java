@@ -2,20 +2,22 @@ package com.pinyougou.sellergoods.service;
 import java.util.List;
 
 import com.pinyougou.entity.PageResult;
-import com.pinyougou.pojo.TbSeller;
+import com.pinyougou.pojo.TbItem;
+import com.pinyougou.pojo.TbItemCat;
+
 
 /**
  * 业务逻辑接口
  * @author Steven
  *
  */
-public interface SellerService {
+public interface ItemService {
 
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
-	public List<TbSeller> findAll();
+	public List<TbItem> findAll();
 	
 	
 	/**
@@ -28,13 +30,13 @@ public interface SellerService {
 	/**
 	 * 增加
 	*/
-	public void add(TbSeller seller);
+	public void add(TbItem item);
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(TbSeller seller);
+	public void update(TbItem item);
 	
 
 	/**
@@ -42,7 +44,7 @@ public interface SellerService {
 	 * @param id
 	 * @return
 	 */
-	public TbSeller findOne(String id);
+	public TbItem findOne(Long id);
 	
 	
 	/**
@@ -57,6 +59,8 @@ public interface SellerService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbSeller seller, int pageNum, int pageSize);
+	public PageResult findPage(TbItem item, int pageNum, int pageSize);
 
+
+	
 }

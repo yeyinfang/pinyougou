@@ -3,6 +3,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.pinyougou.entity.PageResult;
+import com.pinyougou.mapper.TbGoodsDescMapper;
+import com.pinyougou.pojo.TbGoodsDesc;
+import com.pinyougou.pojogroup.Goods;
 import com.pinyougou.sellergoods.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -23,6 +26,8 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private TbGoodsMapper goodsMapper;
+	@Autowired
+	private TbGoodsDescMapper goodsDescMapper;
 	
 	/**
 	 * 查询全部
@@ -57,8 +62,20 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 增加
 	 */
 	@Override
-	public void add(TbGoods goods) {
-		goodsMapper.insertSelective(goods);		
+	public void add(Goods goods) {
+		//首先就是设置商品信息
+		//设置审核的状态为0
+		goods.getGoods().setAuditStatus("0");
+		//goods.getGoods().setBrandId(goods.getBrands().getId());
+		//增加
+		goodsMapper.insertSelective(goods.getGoods());
+		//设置扩展的
+		//设置商品id
+		goods.getGoodsDesc().setGoodsId(goods.getGoods().getId());
+		goodsDescMapper.insertSelective(goods.getGoodsDesc());
+
+
+
 	}
 
 	
